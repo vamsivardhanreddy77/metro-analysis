@@ -43,3 +43,12 @@ The goal is to extract meaningful insights into metro ridership behavior and pro
 
 
 ## 📁 Repository Structure
+├── app.py # Main application runner
+├── data_loader.py # Dataset loading & preprocessing
+├── data_overview.py # Data inspection & summary
+├── crowd_prediction.py # Machine learning models and logic
+├── visualizations.py # Visualization functions
+├── analysis_options.py # Streamlit navigation
+├── requirements.txt # Python dependencies
+├── Delhi metro.csv # Dataset file
+└── README.md # Project documentation

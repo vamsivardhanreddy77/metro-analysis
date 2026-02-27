@@ -1,7 +1,7 @@
 import streamlit as st
 
 def show_data_overview():
-    st.title("📊 Metro Dataset Overview")
+    st.title("Metro Dataset Overview")
 
     if "datasets" not in st.session_state:
         st.error("Dataset not loaded.")

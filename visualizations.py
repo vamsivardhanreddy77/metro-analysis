@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def visualize_data():
-    st.title("📊 Metro Visualizations")
+    st.title(" Metro Visualizations")
 
     if "datasets" not in st.session_state:
         st.error("Dataset not loaded.")

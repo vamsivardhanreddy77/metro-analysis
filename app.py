@@ -6,14 +6,13 @@ from crowd_prediction import crowd_prediction
 
 st.set_page_config(page_title="Delhi Metro Analytics", page_icon="🚇", layout="wide")
 
-st.sidebar.title("🚇 Delhi Metro Analytics")
+st.sidebar.title(" Delhi Metro Analytics")
 
 option = st.sidebar.radio(
     "Select Section",
     ["Data Overview", "Visualizations", "Station Insights"]
 )
 
-# Load dataset automatically
 datasets = load_metro_data()
 
 if datasets is None:

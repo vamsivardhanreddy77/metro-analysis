@@ -4,18 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def crowd_prediction():
-    st.title("🚇 Metro Station Intelligence Dashboard")
+    st.title(" Metro Station Intelligence Dashboard")
 
     if "datasets" not in st.session_state:
         st.error("Dataset not loaded.")
         return
 
-    # Make safe copy
+
     df = st.session_state.datasets["metro_data"].copy()
 
-    # ===============================
-    # CLEAN NUMERIC COLUMNS
-    # ===============================
+
     numeric_cols = [
         "Dist. From First Station(km)",
         "Opened(Year)",
@@ -27,12 +25,10 @@ def crowd_prediction():
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    # Drop rows where essential numeric data is missing
+
     df = df.dropna(subset=["Latitude", "Longitude"])
 
-    # ===============================
-    # LINE SELECTION
-    # ===============================
+
     selected_line = st.selectbox(
         "Select Metro Line",
         df["Metro Line"].dropna().unique()
@@ -44,21 +40,17 @@ def crowd_prediction():
         st.warning("No data available for this line.")
         return
 
-    # ===============================
-    # KPI METRICS
-    # ===============================
+ 
     col1, col2, col3 = st.columns(3)
 
     col1.metric("Total Stations", len(line_df))
 
-    # Safe distance calculation
     max_distance = line_df["Dist. From First Station(km)"].max()
     if pd.notna(max_distance):
         col2.metric("Total Distance (km)", round(max_distance, 2))
     else:
         col2.metric("Total Distance (km)", "N/A")
 
-    # Safe oldest year calculation
     oldest_year = line_df["Opened(Year)"].min()
     if pd.notna(oldest_year):
         col3.metric("Oldest Station Year", int(oldest_year))
@@ -67,9 +59,7 @@ def crowd_prediction():
 
     st.divider()
 
-    # ===============================
-    # INTERACTIVE MAP
-    # ===============================
+ 
     st.subheader("🗺 Metro Line Map")
 
     map_df = line_df.rename(
@@ -83,9 +73,6 @@ def crowd_prediction():
 
     st.divider()
 
-    # ===============================
-    # DISTANCE PROGRESSION
-    # ===============================
     st.subheader("📏 Distance Progression")
 
     if pd.notna(max_distance):
@@ -102,9 +89,7 @@ def crowd_prediction():
     else:
         st.info("Distance data not available for this line.")
 
-    # ===============================
-    # LAYOUT DISTRIBUTION
-    # ===============================
+  
     st.subheader("🏗 Station Layout Distribution")
 
     layout_counts = line_df["Layout"].value_counts()
@@ -122,8 +107,6 @@ def crowd_prediction():
 
     st.divider()
 
-    # ===============================
-    # DATA TABLE
-    # ===============================
+ 
     st.subheader("📋 Station Details")
     st.dataframe(line_df)
